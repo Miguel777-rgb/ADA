@@ -158,7 +158,52 @@ Para utilizar este script, asegúrese de tener instaladas las bibliotecas necesa
     * Se creará un archivo de log llamado `grafo_parkingson_paralelizado.log` con detalles de la ejecución.
     * En la consola, se mostrará información sobre la carga y el número de nodos y aristas del grafo cargado, así como los atributos de latitud y longitud del primer nodo (si el grafo no está vacío).
 
-## Notas Adicionales
+## Referencias del Código de Generación y Carga de Grafos Paralelizada (Formato APA)
+
+A continuación, se presentan las referencias de las librerías y conceptos clave utilizados en el código, formateadas según el estilo de la American Psychological Association (APA):
+
+### Librerías de Python
+
+1.  **igraph.** (s. f.). *igraph documentation*. Recuperado de [https://igraph.org/python/doc/](https://igraph.org/python/doc/)
+
+2.  **The Python Standard Library.** (s. f.). *time --- Time access and conversions*. Recuperado de [https://docs.python.org/3/library/time.html](https://docs.python.org/3/library/time.html)
+
+3.  **The Python Standard Library.** (s. f.). *logging --- Logging facility for Python*. Recuperado de [https://docs.python.org/3/library/logging.html](https://docs.python.org/3/library/logging.html)
+
+4.  **The Python Standard Library.** (s. f.). *fileinput --- Facilitate looping over lines of standard input or a list of files*. Recuperado de [https://docs.python.org/3/library/fileinput.html](https://docs.python.org/3/library/fileinput.html)
+
+5.  **The Python Standard Library.** (s. f.). *pickle --- Python object serialization*. Recuperado de [https://docs.python.org/3/library/pickle.html](https://docs.python.org/3/library/pickle.html)
+
+6.  **The Python Standard Library.** (s. f.). *gc --- Garbage Collector interface*. Recuperado de [https://docs.python.org/3/library/gc.html](https://docs.python.org/3/library/gc.html)
+
+7.  **The Python Standard Library.** (s. f.). *multiprocessing --- Process-based parallelism*. Recuperado de [https://docs.python.org/3/library/multiprocessing.html](https://docs.python.org/3/library/multiprocessing.html)
+
+8.  **The Python Standard Library.** (s. f.). *itertools --- Functions creating iterators for efficient looping*. Recuperado de [https://docs.python.org/3/library/itertools.html](https://docs.python.org/3/library/itertools.html)
+
+## Recursos Adicionales (Tutoriales y Conceptos)
+
+Si bien las documentaciones oficiales son las referencias primarias, los siguientes tipos de recursos pueden complementar la comprensión:
+
+* **Tutoriales de Python sobre:** Realiza búsquedas en línea en sitios como:
+    * Real Python ([https://realpython.com/](https://realpython.com/))
+    * Python.org Tutorials ([https://docs.python.org/3/tutorial/](https://docs.python.org/3/tutorial/))
+    * GeeksforGeeks ([https://www.geeksforgeeks.org/python/](https://www.geeksforgeeks.org/python/))
+    * Stack Overflow ([https://stackoverflow.com/](https://stackoverflow.com/)) (busca preguntas específicas sobre las librerías y conceptos).
+
+* **Libros sobre Python:** Busca libros como "Automate the Boring Stuff with Python" de Al Sweigart, "Python Crash Course" de Eric Matthes, o "Fluent Python" de Luciano Ramalho para una comprensión más profunda.
+
+* **Cursos en línea:** Explora plataformas como:
+    * Coursera ([https://www.coursera.org/](https://www.coursera.org/))
+    * edX ([https://www.edx.org/](https://www.edx.org/))
+    * Udemy ([https://www.udemy.com/](https://www.udemy.com/))
+    * DataCamp ([https://www.datacamp.com/](https://www.datacamp.com/))
+
+* **Comunidades en línea:**
+    * Reddit (subreddits como r/learnpython ([https://www.reddit.com/r/learnpython/](https://www.reddit.com/r/learnpython/)), r/python ([https://www.reddit.com/r/python/](https://www.reddit.com/r/python/)))
+
+**Apunte:** Las fechas de recuperación ("Recuperado de") se indican como "s. f." (sin fecha) ya que la documentación de las librerías suele estar en constante actualización y no siempre tiene una fecha de publicación específica para la totalidad del sitio web. Si estuvieras citando una sección específica con una fecha, deberías incluirla. Los enlaces a los recursos adicionales son generales para facilitar la búsqueda de tutoriales y cursos relevantes.
+
+## Concluyendo
 
 * El parámetro `num_procesos` en la función `procesar_usuarios_paralelizado` se establece por defecto al número de núcleos de la CPU, lo que generalmente proporciona un buen rendimiento. Puede ajustar este valor según las capacidades de su sistema.
 * Se realiza una limpieza de memoria explícita (`del` y `gc.collect()`) después de la creación del grafo para liberar recursos, especialmente importante cuando se trabaja con grandes conjuntos de datos.
