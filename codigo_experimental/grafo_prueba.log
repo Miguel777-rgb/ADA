@@ -1,0 +1,38 @@
+2025-05-14 10:45:02,888 - INFO - Iniciando prueba de carga del grafo.
+2025-05-14 10:45:34,079 - INFO - Grafo cargado correctamente desde 'grafo_igraph_paralelizado.pkl' en 31.1907 segundos.
+2025-05-14 10:45:34,148 - WARNING - Error al cargar atributos desde 'atributos_igraph_paralelizado.parquet': persistent IDs in protocol 0 must be ASCII strings
+2025-05-14 10:45:34,149 - INFO - Verificando la indexación de los nodos...
+2025-05-14 10:45:34,151 - INFO - Verificación de indexación de nodos completada.
+2025-05-14 10:45:34,151 - INFO - Verificando el atributo 'location' en algunos nodos...
+2025-05-14 10:45:34,152 - WARNING - Nodo 0 no tiene el atributo 'location'.
+2025-05-14 10:45:34,152 - WARNING - Nodo 1 no tiene el atributo 'location'.
+2025-05-14 10:45:34,153 - WARNING - Nodo 2 no tiene el atributo 'location'.
+2025-05-14 10:45:34,153 - WARNING - Nodo 3 no tiene el atributo 'location'.
+2025-05-14 10:45:34,153 - WARNING - Nodo 4 no tiene el atributo 'location'.
+2025-05-14 10:45:34,154 - INFO - Verificación del atributo 'location' completada.
+2025-05-14 10:45:34,154 - INFO - Verificando el atributo 'lat' en algunos nodos...
+2025-05-14 10:45:34,154 - INFO - Verificación del atributo 'lat' completada.
+2025-05-14 10:45:34,154 - INFO - Verificando el atributo 'lon' en algunos nodos...
+2025-05-14 10:45:34,155 - INFO - Verificación del atributo 'lon' completada.
+2025-05-14 10:45:34,155 - INFO - Verificando las conexiones del nodo 1 (índice 0)...
+2025-05-14 10:45:34,156 - INFO - El nodo 1 tiene 55 conexiones salientes.
+2025-05-14 10:45:34,268 - INFO - 
+shape: (100, 5)
+┌───────┬─────────┬────────────┬────────────┬────────────┐
+│ Index ┆ Nodo    ┆ Latitud    ┆ Longitud   ┆ Conexiones │
+│ ---   ┆ ---     ┆ ---        ┆ ---        ┆ ---        │
+│ i64   ┆ i64     ┆ f64        ┆ f64        ┆ i64        │
+╞═══════╪═════════╪════════════╪════════════╪════════════╡
+│ 1     ┆ 1       ┆ 134.174591 ┆ -83.12736  ┆ 55         │
+│ 2     ┆ 2       ┆ 135.781473 ┆ -83.147767 ┆ 15         │
+│ 3     ┆ 3       ┆ 135.333518 ┆ -83.726266 ┆ 95         │
+│ 4     ┆ 4       ┆ 135.792959 ┆ -82.706042 ┆ 86         │
+│ 5     ┆ 5       ┆ 134.43269  ┆ -82.869577 ┆ 2          │
+│ …     ┆ …       ┆ …          ┆ …          ┆ …          │
+│ 96    ┆ 999996  ┆ 135.623489 ┆ -82.077885 ┆ 38         │
+│ 97    ┆ 999997  ┆ 135.729267 ┆ -83.42915  ┆ 91         │
+│ 98    ┆ 999998  ┆ 135.765655 ┆ -83.618317 ┆ 57         │
+│ 99    ┆ 999999  ┆ 135.741707 ┆ -83.985883 ┆ 34         │
+│ 100   ┆ 1000000 ┆ 134.058085 ┆ -82.048534 ┆ 44         │
+└───────┴─────────┴────────────┴────────────┴────────────┘
+2025-05-14 10:45:34,324 - INFO - Tabla de muestra guardada en 'tabla_grafos_prueba.csv'.

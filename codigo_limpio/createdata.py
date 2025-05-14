@@ -35,9 +35,9 @@ def generar_conexiones(num_conexiones, nombre_archivo="1_million_user.txt"):
         with open(nombre_archivo, 'w') as archivo:
             for i in range(num_conexiones):
                 # Genera un número aleatorio de ubicaciones visitadas por el usuario
-                num_ubicaciones_visitadas = random.randint(1, 30)  # Cada usuario visita entre 1 y 20 ubicaciones
+                num_ubicaciones_visitadas = random.randint(0, 100)  # Cada usuario visita entre 1 y 20 ubicaciones
                 # Genera una lista de ubicaciones visitadas (índices)
-                ubicaciones_visitadas = [random.randint(1, 1000300) for _ in range(num_ubicaciones_visitadas)]  # Asume que tienes 10,000 ubicaciones
+                ubicaciones_visitadas = [random.randint(1, 1000700) for _ in range(num_ubicaciones_visitadas)]  # Asume que tienes 10,000 ubicaciones
                 # Escribe las conexiones en el archivo con el formato especificado
                 archivo.write(f"{i},{','.join(map(str, ubicaciones_visitadas))}\n")
         print(f"Se ha generado el archivo '{nombre_archivo}' con {num_conexiones} conexiones.")
