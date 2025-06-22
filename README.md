@@ -1071,9 +1071,13 @@ if __name__ == "__main__":
                 # 3. Crea y guarda el mapa.
                 visualizar_comunidades(mi_grafo, coms_dict, comunidades_seleccionadas, MAPA_HTML_SALIDA)
                 
-                # 4. Imprime el resumen final.
-                # ...
 ```
+
+1.  **El grafo tiene un "componente gigante" muy denso.** El análisis de comunidades (imagen original) muestra que casi 9 millones de los 10 millones de nodos pertenecen a una única comunidad masiva. Esto indica que la red está altamente interconectada, formando un núcleo central donde la mayoría de los puntos están conectados entre sí, directa o indirectamente.
+
+2.  **Es posible encontrar rutas muy eficientes entre puntos lejanos.** El mapa de Dijkstra (`analisis_de_red_dijkstra.html`) demuestra que, a pesar del enorme tamaño de la red, el algoritmo encontró una ruta óptima de aproximadamente **19,600 km**. Este camino es notablemente más corto que muchas otras rutas aleatorias, lo que prueba la eficacia del algoritmo para optimizar conexiones en una red compleja.
+
+3.  **Explorar la red sin un objetivo de distancia revela su complejidad.** El mapa de recorrido DFS (`mapa_dfs_multicapa.html`) muestra un camino largo y sinuoso que salta entre continentes. A diferencia de Dijkstra, el DFS explora la profundidad de las conexiones, revelando cómo los nodos están enlazados de formas no siempre intuitivas geográficamente y demostrando la complejidad estructural del grafo.
 
 ## Referencias del Código de Generación y Carga de Grafos Paralelizada (Formato APA)
 
