@@ -8,13 +8,12 @@ log.basicConfig(
     level=log.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        log.FileHandler("grafo_prueba.log", mode='w', encoding='utf-8'),
+        log.FileHandler("grafo_pruebas.log", mode='w', encoding='utf-8'),
         log.StreamHandler()
     ]
 )
 
-def cargar_grafo_con_atributos(grafo_path, atributos_path):
-    """Carga el grafo y sus atributos desde archivos pickle."""
+def cargar_grafo(grafo_path, atributos_path):
     start_time = time.time()
     try:
         with open(grafo_path, 'rb') as f:
@@ -163,25 +162,19 @@ grafo_archivo = 'grafo_igraph_paralelizado.pkl'
 grafo_atributos_archivo = 'atributos_igraph_paralelizado.parquet'
 
 # Cargar el grafo desde el archivo
-grafo = cargar_grafo_con_atributos(grafo_archivo, grafo_atributos_archivo)
+grafo = cargar_grafo(grafo_archivo, grafo_atributos_archivo)
 
 if grafo:
-    # --- Pruebas de verificación ---
-    # (Puedes descomentar y modificar estos parámetros según tu caso)
 
-    # 1. Verificar el número total de nodos y aristas
-    # Para hacer esta verificación útil, necesitarías saber de antemano
-    # cuántos nodos y aristas DEBERÍA tener tu grafo.
-    # verificar_insercion_nodos_aristas(grafo, num_nodos_esperado=1000000, num_aristas_esperado=...)
 
-    # 2. Verificar la indexación de los nodos
+    # 1. Verificar la indexación de los nodos
     verificar_indexacion_nodos(grafo, num_nodos_a_verificar=10)
 
-    # 3. Verificar la existencia de atributos en los nodos
+    # 2. Verificar la existencia de atributos en los nodos
     verificar_atributos_nodos(grafo, atributo_a_verificar='lat', num_nodos_a_verificar=5)
     verificar_atributos_nodos(grafo, atributo_a_verificar='lon', num_nodos_a_verificar=5)
 
-    # 4. Verificar las conexiones de un nodo específico
+    # 3. Verificar las conexiones de un nodo específico
     verificar_conexiones(grafo, nodo_a_verificar=0, num_conexiones_esperadas=None) # Puedes especificar el número esperado
 
     # --- Generar y guardar tabla de muestra ---

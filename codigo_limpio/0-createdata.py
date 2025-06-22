@@ -13,8 +13,8 @@ def generar_ubicaciones(num_ubicaciones, nombre_archivo="1_million_location.txt"
         with open(nombre_archivo, 'w') as archivo:
             for _ in range(num_ubicaciones):
                 # Genera latitud y longitud aleatorias dentro de rangos razonables
-                latitud = random.uniform(-84, -82)  # Valores de latitud entre -84 y -82
-                longitud = random.uniform(134, 136) # Valores de longitud 134 y 136
+                latitud = random.uniform(-90, 90)  # Valores de latitud entre -84 y -82
+                longitud = random.uniform(-180, 180) # Valores de longitud 134 y 136
                 # Escribe la coordenada en el archivo con el formato especificado
                 archivo.write(f"{latitud},{longitud}\n")
         print(f"Se ha generado el archivo '{nombre_archivo}' con {num_ubicaciones} ubicaciones.")

@@ -1,12 +1,3 @@
-# analisis_comunidades_lpa_final.py
-"""
-Script final para la detección y visualización de comunidades en una red a gran escala.
-
-ALGORITMO: Label Propagation Algorithm (LPA) propio.
-VERSIÓN FINAL: Incluye optimizaciones para manejar comunidades gigantes mediante umbrales
-y muestreo, y añade logs de diagnóstico para una mejor interpretación de la visualización.
-"""
-
 import pickle
 import time
 import logging
@@ -14,27 +5,17 @@ import random
 from collections import Counter
 import igraph as ig
 from typing import Optional, List, Dict
+import folium
+from folium.plugins import MarkerCluster
+import matplotlib
+import matplotlib.colors as colors
+from tqdm import tqdm
 
-# --- Manejo de dependencias opcionales ---
-try:
-    import folium
-    from folium.plugins import MarkerCluster
-    import matplotlib
-    import matplotlib.colors as colors
-    LIBS_DISPONIBLES = True
-except ImportError:
-    LIBS_DISPONIBLES = False
-
-try:
-    from tqdm import tqdm
-    TQDM_DISPONIBLE = True
-except ImportError:
-    TQDM_DISPONIBLE = False
 
 # --- Configuración del Logging ---
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s',
-                    handlers=[logging.FileHandler("analisis_comunidades_lpa_final.log", mode='w', encoding='utf-8'),
-                              logging.StreamHandler()])
+handlers=[logging.FileHandler("analisis_comunidades_lpa_final.log", mode='w', encoding='utf-8'),
+logging.StreamHandler()])
 
 # --- UMBRALES DE VISUALIZACIÓN ---
 # Si una comunidad tiene más nodos que este umbral, no dibujaremos sus aristas.
@@ -64,7 +45,7 @@ def detectar_comunidades_lpa(graph: ig.Graph, max_iter: int = 10) -> Dict[int, L
         changes_count = 0
         
         nodes_to_process = list(range(graph.vcount())); random.shuffle(nodes_to_process)
-        iterator = tqdm(nodes_to_process, desc=f"Iteración {i+1}") if TQDM_DISPONIBLE else nodes_to_process
+        iterator = tqdm(nodes_to_process, desc=f"Iteración {i+1}")
         
         for node_id in iterator:
             neighbors = graph.neighbors(node_id, mode='all')
@@ -123,7 +104,6 @@ def crear_mapa_de_colores(tamaño_min: int, tamaño_max: int):
 
 # --- Función de Visualización (con todas las optimizaciones) ---
 def visualizar_comunidades(graph: ig.Graph, comunidades_dict: Dict[int, List[int]], seleccion: Dict[str, List[int]], output_filename: str):
-    if not LIBS_DISPONIBLES: return
     logging.info(f"Creando mapa de visualización en '{output_filename}'...")
     coords_validas = [(v['lat'], v['lon']) for v in graph.vs if v['lat'] is not None and v.index != 0]
     if not coords_validas: logging.error("No hay nodos con coordenadas para visualizar."); return
@@ -133,7 +113,7 @@ def visualizar_comunidades(graph: ig.Graph, comunidades_dict: Dict[int, List[int
     if not tamaños: logging.error("Las comunidades están vacías, no se puede generar el mapa."); return
     mapa_color = crear_mapa_de_colores(min(tamaños.values()), max(tamaños.values()))
     ids_a_visualizar = seleccion['grande'] + seleccion['pequena'] + seleccion['random']
-    iterator = tqdm(ids_a_visualizar, desc="Creando capas de comunidades") if TQDM_DISPONIBLE else ids_a_visualizar
+    iterator = tqdm(ids_a_visualizar, desc="Creando capas de comunidades")
     
     for com_id in iterator:
         miembros_originales = comunidades_dict.get(com_id)
@@ -191,29 +171,26 @@ if __name__ == "__main__":
     NUM_COMUNIDADES_RANDOM = 20
     MAX_ITER_LPA = 10
 
-    if not LIBS_DISPONIBLES:
-        logging.error("Librerías de visualización no encontradas. Ejecuta: pip install folium matplotlib tqdm")
-    else:
-        mi_grafo = cargar_grafo(GRAFO_PKL_ENTRADA)
-        if mi_grafo:
-            coms_dict = detectar_comunidades_lpa(mi_grafo, max_iter=MAX_ITER_LPA)
-            if coms_dict:
-                comunidades_seleccionadas = analizar_y_seleccionar_comunidades(coms_dict, NUM_COMUNIDADES_RANDOM)
-                if comunidades_seleccionadas:
-                    visualizar_comunidades(mi_grafo, coms_dict, comunidades_seleccionadas, MAPA_HTML_SALIDA)
-                    
-                    print("\n" + "="*60)
-                    print(" ANÁLISIS DE COMUNIDADES (LPA - VERSIÓN FINAL OPTIMIZADA)")
-                    print("="*60)
-                    print(f"Se encontraron un total de {len(coms_dict)} comunidades.")
-                    print("\nSe ha generado un mapa interactivo en:", f"'{MAPA_HTML_SALIDA}'")
-                    print("\nOPTIMIZACIONES DE VISUALIZACIÓN:")
-                    print(f"  - Muestreo de Nodos: Para comunidades con > {UMBRAL_MAX_NODOS_A_DIBUJAR} miembros,")
-                    print("    solo se muestra una muestra aleatoria para no colapsar el navegador.")
-                    print(f"  - Omisión de Aristas: Los caminos solo se dibujan para comunidades")
-                    print(f"    con <= {UMBRAL_MAX_VISUALIZACION_ARISTAS} miembros.")
-                    print("\nEl color de cada comunidad indica su tamaño original:")
-                    print("  - Colores fríos (azul): Comunidades pequeñas.")
-                    print("  - Colores cálidos (rojo): Comunidades grandes.")
-                    print("\nPara más detalles, revisa el archivo de log: 'analisis_comunidades_lpa_final.log'")
-                    print("="*60)
+    mi_grafo = cargar_grafo(GRAFO_PKL_ENTRADA)
+    if mi_grafo:
+        coms_dict = detectar_comunidades_lpa(mi_grafo, max_iter=MAX_ITER_LPA)
+        if coms_dict:
+            comunidades_seleccionadas = analizar_y_seleccionar_comunidades(coms_dict, NUM_COMUNIDADES_RANDOM)
+            if comunidades_seleccionadas:
+                visualizar_comunidades(mi_grafo, coms_dict, comunidades_seleccionadas, MAPA_HTML_SALIDA)
+                
+                print("\n" + "="*60)
+                print(" ANÁLISIS DE COMUNIDADES (LPA - VERSIÓN FINAL OPTIMIZADA)")
+                print("="*60)
+                print(f"Se encontraron un total de {len(coms_dict)} comunidades.")
+                print("\nSe ha generado un mapa interactivo en:", f"'{MAPA_HTML_SALIDA}'")
+                print("\nOPTIMIZACIONES DE VISUALIZACIÓN:")
+                print(f"  - Muestreo de Nodos: Para comunidades con > {UMBRAL_MAX_NODOS_A_DIBUJAR} miembros,")
+                print("    solo se muestra una muestra aleatoria para no colapsar el navegador.")
+                print(f"  - Omisión de Aristas: Los caminos solo se dibujan para comunidades")
+                print(f"    con <= {UMBRAL_MAX_VISUALIZACION_ARISTAS} miembros.")
+                print("\nEl color de cada comunidad indica su tamaño original:")
+                print("  - Colores fríos (azul): Comunidades pequeñas.")
+                print("  - Colores cálidos (rojo): Comunidades grandes.")
+                print("\nPara más detalles, revisa el archivo de log: 'analisis_comunidades_lpa_final.log'")
+                print("="*60)

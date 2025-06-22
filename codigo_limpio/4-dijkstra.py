@@ -20,20 +20,10 @@ from math import radians, sin, cos, sqrt, atan2
 from itertools import combinations
 import igraph as ig
 from typing import Dict, Optional, Tuple, List, Any
+import folium
+from folium.plugins import BeautifyIcon
+from tqdm import tqdm
 
-# --- Manejo de dependencias opcionales ---
-try:
-    import folium
-    from folium.plugins import BeautifyIcon
-    FOLIUM_DISPONIBLE = True
-except ImportError:
-    FOLIUM_DISPONIBLE = False
-
-try:
-    from tqdm import tqdm
-    TQDM_DISPONIBLE = True
-except ImportError:
-    TQDM_DISPONIBLE = False
 
 # --- Configuración del Logging ---
 logging.basicConfig(
@@ -146,7 +136,7 @@ def encontrar_camino_mas_corto_dijkstra(graph: ig.Graph, source: int, sink: int)
 
 def crear_mapa_camino_corto(graph: ig.Graph, camino: List[int], coste: float, source: int, sink: int) -> Optional[folium.Map]:
     """Crea un mapa base con el camino más corto encontrado."""
-    if not FOLIUM_DISPONIBLE: return None
+
     logging.info("Creando mapa base con el camino más corto...")
     try:
         start_coords = (graph.vs[source]['lat'], graph.vs[source]['lon'])
@@ -179,12 +169,11 @@ def crear_mapa_camino_corto(graph: ig.Graph, camino: List[int], coste: float, so
 
 def agregar_caminos_random_al_mapa(m: folium.Map, graph: ig.Graph, num_caminos: int):
     """Genera caminos aleatorios (usando Dijkstra) y los agrega al mapa para contexto."""
-    if not FOLIUM_DISPONIBLE or m is None: return
     
     logging.info(f"Generando {num_caminos} caminos aleatorios para dar contexto a la red...")
     caminos_generados = []
     max_node_id = graph.vcount() - 1
-    iterator = tqdm(range(num_caminos), desc="Generando caminos aleatorios") if TQDM_DISPONIBLE else range(num_caminos)
+    iterator = tqdm(range(num_caminos), desc="Generando caminos aleatorios")
 
     for _ in iterator:
         # Intentar hasta encontrar un par de nodos válidos con un camino entre ellos
@@ -231,11 +220,6 @@ if __name__ == "__main__":
     GRAFO_PKL_ENTRADA = 'grafo_igraph_paralelizado.pkl'
     MAPA_HTML_SALIDA = 'analisis_de_red_dijkstra.html'
     NUM_CAMINOS_RANDOM = 1000
-
-    if not FOLIUM_DISPONIBLE:
-        logging.error("La librería 'folium' es necesaria para la visualización. Instálala con: pip install folium")
-    if not TQDM_DISPONIBLE:
-        logging.warning("La librería 'tqdm' no está instalada. No se mostrará barra de progreso. Instálala con: pip install tqdm")
 
     # 1. Cargar el grafo
     mi_grafo = cargar_grafo(GRAFO_PKL_ENTRADA)
