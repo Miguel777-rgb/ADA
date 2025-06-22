@@ -1,0 +1,32 @@
+2025-06-22 14:22:53,610 - INFO - Cargando el grafo desde 'grafo_igraph_paralelizado.pkl'...
+2025-06-22 14:24:16,677 - INFO - Grafo cargado en 83.02 segundos. IGRAPH D--- 10000000 142072110 -- 
++ attr: lat (v), lon (v)
+2025-06-22 14:24:16,681 - INFO - Iniciando detección de comunidades con algoritmo propio (LPA) con 3 iteraciones...
+2025-06-22 14:24:19,736 - INFO - LPA - Iteración 1/3...
+2025-06-22 14:26:01,293 - INFO - Fin de la iteración 1. Hubo 9981140 cambios de etiqueta.
+2025-06-22 14:26:01,294 - INFO - LPA - Iteración 2/3...
+2025-06-22 14:27:46,069 - INFO - Fin de la iteración 2. Hubo 4571089 cambios de etiqueta.
+2025-06-22 14:27:46,108 - INFO - LPA - Iteración 3/3...
+2025-06-22 14:29:16,308 - INFO - Fin de la iteración 3. Hubo 1068642 cambios de etiqueta.
+2025-06-22 14:29:16,309 - WARNING - Se alcanzó el máximo de iteraciones sin convergencia completa.
+2025-06-22 14:29:17,475 - INFO - LPA completado en 300.79 s. Se encontraron 7542 comunidades.
+2025-06-22 14:29:17,885 - INFO - Analizando y seleccionando comunidades para visualización...
+2025-06-22 14:29:17,927 - INFO - Comunidad más grande (ID 34700): 8997594 miembros.
+2025-06-22 14:29:17,927 - INFO - Comunidad más pequeña (>1 miembro) (ID 452577): 2 miembros.
+2025-06-22 14:29:17,928 - INFO - Se seleccionaron 10 comunidades aleatorias (tamaño < 2000).
+2025-06-22 14:29:17,928 - INFO - Creando mapa de visualización en 'analisis_comunidades_lpa_final.html'...
+2025-06-22 14:29:23,175 - WARNING - Comunidad 34700 (8997594 nodos) excede umbral. Mostrando muestra de 2000.
+2025-06-22 14:29:23,210 - WARNING - Omitiendo dibujo de aristas para comunidad 34700 (tamaño: 8997594 > 2000).
+2025-06-22 14:29:23,215 - INFO - Comunidad 452577 (tamaño 2): Intentando dibujar conexiones. Se encontraron 0 aristas internas.
+2025-06-22 14:29:23,217 - INFO - Comunidad 1802919 (tamaño 57): Intentando dibujar conexiones. Se encontraron 0 aristas internas.
+2025-06-22 14:29:23,218 - INFO - Comunidad 3381417 (tamaño 6): Intentando dibujar conexiones. Se encontraron 10 aristas internas.
+2025-06-22 14:29:23,221 - INFO - Comunidad 1386093 (tamaño 94): Intentando dibujar conexiones. Se encontraron 186 aristas internas.
+2025-06-22 14:29:23,225 - INFO - Comunidad 2301911 (tamaño 26): Intentando dibujar conexiones. Se encontraron 0 aristas internas.
+2025-06-22 14:29:23,226 - INFO - Comunidad 2019880 (tamaño 28): Intentando dibujar conexiones. Se encontraron 0 aristas internas.
+2025-06-22 14:29:23,227 - INFO - Comunidad 504757 (tamaño 10): Intentando dibujar conexiones. Se encontraron 18 aristas internas.
+2025-06-22 14:29:23,229 - INFO - Comunidad 475044 (tamaño 13): Intentando dibujar conexiones. Se encontraron 24 aristas internas.
+2025-06-22 14:29:23,230 - INFO - Comunidad 102178 (tamaño 18): Intentando dibujar conexiones. Se encontraron 0 aristas internas.
+2025-06-22 14:29:23,232 - INFO - Comunidad 653590 (tamaño 43): Intentando dibujar conexiones. Se encontraron 84 aristas internas.
+2025-06-22 14:29:23,239 - INFO - Comunidad 1573587 (tamaño 309): Intentando dibujar conexiones. Se encontraron 632 aristas internas.
+2025-06-22 14:29:23,248 - INFO - Guardando el mapa en el archivo HTML. Este paso puede tardar...
+2025-06-22 14:29:25,046 - INFO - Mapa guardado correctamente en 'analisis_comunidades_lpa_final.html'.

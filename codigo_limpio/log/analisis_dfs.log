@@ -1,0 +1,19 @@
+2025-06-22 13:25:32,322 - INFO - Cargando el grafo desde 'grafo_igraph_paralelizado.pkl'...
+2025-06-22 13:27:32,656 - INFO - Grafo cargado en 120.31 segundos. IGRAPH D--- 10000000 142072110 -- 
++ attr: lat (v), lon (v)
+2025-06-22 13:27:32,670 - INFO - Nodo de inicio de la travesía DFS seleccionado al azar: 6640860
+2025-06-22 13:27:32,670 - INFO - Iniciando travesía DFS completa desde el nodo 6640860.
+2025-06-22 13:27:59,066 - INFO - Travesía DFS completada en 26.3948 segundos. Total de nodos visitados: 9998486.
+2025-06-22 13:27:59,153 - INFO - Creando mapa multicapa con visualización consistente.
+=======================================================
+      ANÁLISIS DE TRAVESÍA DFS CON MÚLTIPLES CAPAS
+=======================================================
+Travesía iniciada desde el nodo (aleatorio): 6640860
+Tiempo total de la travesía: 26.3948 segundos.
+Total de nodos visitados en el componente: 9998486
+
+Mapa interactivo guardado en: 'mapa_dfs_multicapa.html'
+ -> El mapa contiene DOS capas consistentes que puedes activar/desactivar:
+    1. 'Camino DFS': La línea que muestra la forma de la travesía.
+    2. 'Muestra de Nodos': Puntos aleatorios tomados DEL CAMINO VISIBLE.
+=======================================================

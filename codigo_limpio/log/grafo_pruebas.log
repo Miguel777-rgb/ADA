@@ -1,0 +1,31 @@
+2025-06-22 13:22:16,098 - INFO - Iniciando prueba de carga del grafo.
+2025-06-22 13:24:22,222 - INFO - Grafo cargado correctamente desde 'grafo_igraph_paralelizado.pkl' en 126.0831 segundos.
+2025-06-22 13:24:22,226 - WARNING - Archivo de atributos no encontrado en 'atributos_igraph_paralelizado.parquet'.
+2025-06-22 13:24:22,226 - INFO - Verificando la indexación de los nodos...
+2025-06-22 13:24:22,229 - INFO - Verificación de indexación de nodos completada.
+2025-06-22 13:24:22,229 - INFO - Verificando el atributo 'lat' en algunos nodos...
+2025-06-22 13:24:22,230 - INFO - Verificación del atributo 'lat' completada.
+2025-06-22 13:24:22,231 - INFO - Verificando el atributo 'lon' en algunos nodos...
+2025-06-22 13:24:22,231 - INFO - Verificación del atributo 'lon' completada.
+2025-06-22 13:24:22,232 - INFO - Verificando las conexiones del nodo 1 (índice 0)...
+2025-06-22 13:24:22,233 - INFO - El nodo 1 tiene 2123 conexiones salientes.
+2025-06-22 13:24:22,722 - INFO - 
+shape: (100, 5)
+┌───────┬──────────┬────────────┬─────────────┬────────────┐
+│ Index ┆ Nodo     ┆ Latitud    ┆ Longitud    ┆ Conexiones │
+│ ---   ┆ ---      ┆ ---        ┆ ---         ┆ ---        │
+│ i64   ┆ i64      ┆ f64        ┆ f64         ┆ i64        │
+╞═══════╪══════════╪════════════╪═════════════╪════════════╡
+│ 1     ┆ 1        ┆ -83.168664 ┆ 134.85067   ┆ 2123       │
+│ 2     ┆ 2        ┆ -83.290624 ┆ 134.341523  ┆ 1776       │
+│ 3     ┆ 3        ┆ -83.169196 ┆ 134.229867  ┆ 2549       │
+│ 4     ┆ 4        ┆ -83.548065 ┆ 134.995517  ┆ 1296       │
+│ 5     ┆ 5        ┆ -83.220744 ┆ 134.659429  ┆ 1439       │
+│ …     ┆ …        ┆ …          ┆ …           ┆ …          │
+│ 96    ┆ 9999996  ┆ 72.617514  ┆ -155.780512 ┆ 1          │
+│ 97    ┆ 9999997  ┆ 72.335848  ┆ -155.136039 ┆ 1          │
+│ 98    ┆ 9999998  ┆ 72.480058  ┆ -155.508417 ┆ 1          │
+│ 99    ┆ 9999999  ┆ 72.727829  ┆ -155.185853 ┆ 1          │
+│ 100   ┆ 10000000 ┆ 72.315099  ┆ -155.175995 ┆ 1          │
+└───────┴──────────┴────────────┴─────────────┴────────────┘
+2025-06-22 13:24:22,797 - INFO - Tabla de muestra guardada en 'tabla_grafos_prueba.csv'.
