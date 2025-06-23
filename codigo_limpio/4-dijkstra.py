@@ -1,17 +1,4 @@
 # analisis_completo_de_red.py
-"""
-Script integral para el análisis de una red de gran escala.
-
-Realiza las siguientes operaciones:
-1. Carga un grafo pesado desde un archivo .pkl.
-2. Encuentra automáticamente el par de nodos geográficamente más distantes.
-3. Calcula el CAMINO MÁS CORTO entre ellos usando el algoritmo de Dijkstra.
-4. Genera una muestra de 1000 caminos aleatorios para dar contexto a la red.
-5. Crea un mapa HTML interactivo y optimizado con Folium que visualiza:
-   - La ruta del camino más corto en una capa principal.
-   - Los caminos aleatorios en otra capa, destacando el más largo y el más corto de la muestra.
-"""
-
 import pickle
 import time
 import logging
