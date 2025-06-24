@@ -28,7 +28,7 @@ def cargar_grafo(grafo_path: str) -> Optional[ig.Graph]:
         logging.error(f"Error crítico al cargar el grafo: {e}")
         return None
 
-# --- ALGORITMO DFS (Sin cambios) ---
+# --- ALGORITMO DFS ---
 def dfs_exploracion_desde_un_punto(graph: ig.Graph, source: int) -> Tuple[List[int], float]:
     logging.info(f"Iniciando travesía DFS completa desde el nodo {source}.")
     start_time = time.time()
@@ -46,7 +46,7 @@ def dfs_exploracion_desde_un_punto(graph: ig.Graph, source: int) -> Tuple[List[i
     logging.info(f"Travesía DFS completada en {end_time - start_time:.4f} segundos. Total de nodos visitados: {len(nodos_explorados_en_orden)}.")
     return nodos_explorados_en_orden, end_time - start_time
 
-# --- Función de Visualización (CORREGIDA para una selección de muestra consistente) ---
+# --- Función de Visualización ---
 def crear_mapa_multicapa_dfs(
     graph: ig.Graph, 
     source_node: int,
@@ -134,7 +134,7 @@ def crear_mapa_multicapa_dfs(
 # --- Bloque Principal de Ejecución ---
 if __name__ == "__main__":
     GRAFO_PKL_ENTRADA = 'grafo_igraph_paralelizado.pkl'
-    MAPA_HTML_SALIDA = 'mapa_dfs_multicapa_corregido.html'
+    MAPA_HTML_SALIDA = 'mapa_dfs_multicapa.html'
 
     mi_grafo = cargar_grafo(GRAFO_PKL_ENTRADA)
     
