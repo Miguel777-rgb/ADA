@@ -46,7 +46,11 @@ def dfs_exploracion_desde_un_punto(graph: ig.Graph, source: int) -> Tuple[List[i
     logging.info(f"Travesía DFS completada en {end_time - start_time:.4f} segundos. Total de nodos visitados: {len(nodos_explorados_en_orden)}.")
     return nodos_explorados_en_orden, end_time - start_time
 
+<<<<<<< HEAD
 # --- Función de Visualización ---
+=======
+# --- Función de Visualización  ---
+>>>>>>> f470e255f00c5659d582126782f9cf7abac44dd6
 def crear_mapa_multicapa_dfs(
     graph: ig.Graph, 
     source_node: int,
