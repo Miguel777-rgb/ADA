@@ -11,7 +11,7 @@ from collections import deque
 
 # --- Configuración ---
 GRAFO_PICKLE_PATH = 'grafo_igraph_paralelizado.pkl'
-MAPA_HTML_OUTPUT = 'mapa_camino_largo_con_arbol.html' # Nuevo nombre de archivo
+MAPA_HTML_OUTPUT = 'bfs.html'
 
 # Nodo de inicio
 NODO_INICIO = 9999427
