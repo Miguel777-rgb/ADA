@@ -10,7 +10,7 @@ from typing import Dict, Optional, Tuple, List, Any, Set
 import folium
 from folium.plugins import BeautifyIcon
 from tqdm import tqdm
-import heapq  
+import heapq
 
 # --- Configuración del Logging ---
 logging.basicConfig(
@@ -95,7 +95,7 @@ def encontrar_nodos_mas_distantes_aprox(graph: ig.Graph) -> Optional[Tuple[int, 
 
 # --- FUNCIÓN DE DIJKSTRA ---
 def encontrar_camino_mas_corto_dijkstra(graph: ig.Graph, source: int, sink: int) -> Tuple[Optional[List[int]], Optional[float], float]:
-    logging.info(f"Iniciando algoritmo de Dijkstra (implementación manual) de nodo {source} a {sink}.")
+    logging.info(f"Iniciando algoritmo de Dijkstra (manual) de nodo {source} a {sink}.")
     start_time = time.time()
     
     distances = {v.index: float('inf') for v in graph.vs}
@@ -107,26 +107,29 @@ def encontrar_camino_mas_corto_dijkstra(graph: ig.Graph, source: int, sink: int)
             current_distance, current_node_id = heapq.heappop(priority_queue)
 
             if current_node_id == sink:
-                logging.info("Destino alcanzado. Reconstruyendo el camino.")
                 break
 
             if current_distance > distances[current_node_id]:
                 continue
             
             for neighbor_id in graph.neighbors(current_node_id, mode='out'):
-                edge_id = graph.get_eid(current_node_id, neighbor_id)
-                weight = graph.es[edge_id]['weight']
-                distance_through_current = distances[current_node_id] + weight
-                
-                if distance_through_current < distances[neighbor_id]:
-                    distances[neighbor_id] = distance_through_current
-                    previous_nodes[neighbor_id] = current_node_id
-                    heapq.heappush(priority_queue, (distance_through_current, neighbor_id))
-        
+                try:
+                    edge_id = graph.get_eid(current_node_id, neighbor_id, directed=True, error=True)
+                    weight = graph.es[edge_id]['weight']
+                    distance_through_current = distances[current_node_id] + weight
+                    
+                    if distance_through_current < distances[neighbor_id]:
+                        distances[neighbor_id] = distance_through_current
+                        previous_nodes[neighbor_id] = current_node_id
+                        heapq.heappush(priority_queue, (distance_through_current, neighbor_id))
+                except ValueError:
+                    continue
+
         path = []
+        # Si la distancia al sink es infinito, no se encontró camino.
         if distances[sink] == float('inf'):
             tiempo_total = time.time() - start_time
-            logging.warning(f"No se encontró un camino entre {source} y {sink}.")
+            # logging.warning(f"No se encontró un camino entre {source} y {sink}.")
             return None, None, tiempo_total
 
         current = sink
@@ -136,17 +139,13 @@ def encontrar_camino_mas_corto_dijkstra(graph: ig.Graph, source: int, sink: int)
         
         path.reverse()
         coste_total = distances[sink]
-        tiempo_total = time.time() - start_time
-        logging.info(f"Dijkstra (manual) completado en {tiempo_total:.4f} segundos.")
-        
-        if path[0] != source:
-            logging.error("Error en la reconstrucción del camino.")
+        tiempo_total = time.time() - start_time        
+        if not path or path[0] != source:
             return None, None, tiempo_total
 
         return path, coste_total, tiempo_total
 
     except Exception as e:
-        logging.error(f"Error durante la ejecución de Dijkstra (manual): {e}", exc_info=True)
         tiempo_total = time.time() - start_time
         return None, None, tiempo_total
 
@@ -182,38 +181,59 @@ def crear_mapa_camino_corto(graph: ig.Graph, camino: List[int], coste: float, so
         logging.error(f"No se pudo crear el mapa base. Error: {e}")
         return None
 
-### MODIFICADO ###
+### --- VERSIÓN CORREGIDA Y MEJORADA --- ###
 def agregar_caminos_random_al_mapa(m: folium.Map, graph: ig.Graph, num_caminos: int) -> List[Dict[str, Any]]:
-    """Genera caminos aleatorios (usando Dijkstra de igraph) y los agrega al mapa para contexto. Retorna los caminos generados."""
-    
-    logging.info(f"Generando {num_caminos} caminos aleatorios para dar contexto a la red...")
+    """
+    Genera caminos aleatorios usando la implementación manual de Dijkstra
+    y los agrega al mapa para contexto. Retorna los caminos generados.
+    """
+    logging.info(f"Generando {num_caminos} caminos aleatorios para dar contexto (usando Dijkstra manual)...")
     caminos_generados = []
     max_node_id = graph.vcount() - 1
     iterator = tqdm(range(num_caminos), desc="Generando caminos aleatorios")
+    
+    # Añadimos un contador de intentos para evitar bucles infinitos
+    # si es muy difícil encontrar caminos válidos.
+    max_intentos_por_camino = 50 
+    intentos_totales = 0
+    max_intentos_totales = num_caminos * max_intentos_por_camino
 
     for _ in iterator:
-        for _ in range(10): # Intentos para encontrar un camino válido
+        camino_encontrado = False
+        for i in range(max_intentos_por_camino):
+            intentos_totales += 1
+            if intentos_totales > max_intentos_totales:
+                logging.warning(f"Se ha alcanzado el máximo de {max_intentos_totales} intentos totales. Deteniendo la búsqueda de caminos aleatorios.")
+                break
+
             u, v = random.randint(0, max_node_id), random.randint(0, max_node_id)
-            if u == v or graph.vs[u]['lat'] is None or graph.vs[v]['lat'] is None: continue
+            # Validar que los nodos no sean el mismo y tengan coordenadas
+            if u == v or graph.vs[u]['lat'] is None or graph.vs[v]['lat'] is None:
+                continue
             
-            camino_nodos = graph.get_shortest_paths(u, to=v, weights='weight', output='vpath')
+            camino, coste, _ = encontrar_camino_mas_corto_dijkstra(graph, u, v)
             
-            if camino_nodos and camino_nodos[0]:
-                camino = camino_nodos[0]
+            if camino and coste is not None and coste > 0:
+                # Verificar que todos los nodos en el camino tienen coordenadas para poder dibujarlos
                 if all(graph.vs[nid]['lat'] is not None for nid in camino):
-                    coste = sum(graph.es[graph.get_eid(camino[i], camino[i+1])]['weight'] for i in range(len(camino)-1))
-                    if coste > 0:
-                        caminos_generados.append({'path': camino, 'length_km': coste})
-                        break 
+                    caminos_generados.append({'path': camino, 'length_km': coste})
+                    camino_encontrado = True
+                    break 
+
+        if not camino_encontrado:
+            iterator.set_postfix_str("No se encontró un camino válido en este intento.")
+        
+        if intentos_totales > max_intentos_totales:
+            break
 
     if not caminos_generados:
-        logging.warning("No se pudo generar ningún camino aleatorio válido con coordenadas completas.")
+        logging.warning("No se pudo generar ningún camino aleatorio válido con la implementación manual de Dijkstra.")
         return []
 
     camino_mas_corto_muestra = min(caminos_generados, key=lambda x: x['length_km'])
     camino_mas_largo_muestra = max(caminos_generados, key=lambda x: x['length_km'])
 
-    random_group = folium.FeatureGroup(name=f'{num_caminos} Caminos Aleatorios (Contexto)', show=False)
+    random_group = folium.FeatureGroup(name=f'{len(caminos_generados)} Caminos Aleatorios (Contexto)', show=False)
 
     for camino_info in caminos_generados:
         puntos = [(graph.vs[nid]['lat'], graph.vs[nid]['lon']) for nid in camino_info['path']]
@@ -227,7 +247,7 @@ def agregar_caminos_random_al_mapa(m: folium.Map, graph: ig.Graph, num_caminos: 
         folium.PolyLine(puntos, color=color, weight=weight, opacity=opacity, tooltip=tooltip).add_to(random_group)
         
     random_group.add_to(m)
-    return caminos_generados 
+    return caminos_generados
 
 def agregar_capa_nodos_de_caminos(m: folium.Map, graph: ig.Graph, camino_principal: List[int], caminos_random: List[Dict[str, Any]]):
     """Agrega una capa al mapa con todos los nodos que pertenecen a los caminos visualizados."""
@@ -299,7 +319,7 @@ if __name__ == "__main__":
                     print(f"Rango de análisis (automático): Nodos {SOURCE_NODE} a {SINK_NODE}")
                     print(f"Distancia del Camino Más Corto: {coste_total:.2f} km")
                     print(f"Número de saltos (nodos) en el camino: {len(camino_optimo)}")
-                    print(f"Tiempo de cálculo (Dijkstra): {tiempo_dijkstra:.4f} segundos")
+                    print(f"Tiempo de cálculo (Dijkstra principal): {tiempo_dijkstra:.4f} segundos")
                     
                     if promedio_distancia_random > 0:
                         print("-" * 20)
