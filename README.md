@@ -5,6 +5,10 @@ Este script de Python está diseñado para construir un grafo a partir de datos 
 Drive (contiene el grafo.pkl):
 https://drive.google.com/drive/folders/1gLylv7wahcpLzcefsCbAXcYFj1ut7yfo?usp=sharing 
 
+También, se pueden ver los resultados a partir de:
+```bash
+/vista_grafo/1-index.html
+```
 ---
 
 # Análisis de Redes a Gran Escala
