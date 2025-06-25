@@ -89,15 +89,15 @@ def visualizar_arbol_bfs(graph, start_node_id, max_nodes, output_filename):
             fill=True, fill_color=colors[level % len(colors)], fill_opacity=0.6, popup=popup_text
         ).add_to(nodos_explorados_group)
 
-    # --- NUEVO: 6. Añadir las aristas estáticas del árbol BFS completo ---
+    # 6. Añadir las aristas estáticas del árbol BFS completo ---
     for parent, child in tree_edges:
         parent_coords = (graph.vs[parent]['lat'], graph.vs[parent]['lon'])
         child_coords = (graph.vs[child]['lat'], graph.vs[child]['lon'])
         
         folium.PolyLine(
             locations=[parent_coords, child_coords],
-            color='#AAAAAA',  # Un color gris claro para que no domine
-            weight=1,         # Línea delgada
+            color='#AAAAAA',  
+            weight=1,         
             opacity=0.7
         ).add_to(aristas_estaticas_group)
         
