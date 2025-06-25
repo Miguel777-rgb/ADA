@@ -180,8 +180,6 @@ def detectar_comunidades_louvain_manual(graph: ig.Graph) -> Dict[int, List[int]]
     logging.info(f"Algoritmo manual de Louvain completado en {end_time - start_time:.2f} s. Se encontraron {len(final_comunidades)} comunidades.")
     return dict(final_comunidades)
 
-# El resto del código (análisis, colores, visualización y bloque main).
-# ... (pegar el resto del código desde aquí)
 # --- Función de Análisis  ---
 def analizar_y_seleccionar_comunidades(comunidades_dict: Dict[int, List[int]], num_random: int = 20) -> Dict[str, List[int]]:
     logging.info("Analizando y seleccionando comunidades para visualización...");
