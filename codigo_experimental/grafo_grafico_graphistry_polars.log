@@ -1,0 +1,4 @@
+2025-06-25 05:38:11,818 - ERROR - Error: Las variables de entorno GRAPHISTRY_USERNAME y GRAPHISTRY_PASSWORD no están definidas.
+2025-06-25 05:38:11,818 - ERROR - Por favor, configúralas antes de ejecutar el script.
+2025-06-25 05:38:11,818 - ERROR - Ejemplo en Linux/macOS: export GRAPHISTRY_USERNAME='tu_usuario'
+2025-06-25 05:38:11,818 - ERROR - Ejemplo en Windows: set GRAPHISTRY_USERNAME='tu_usuario'
