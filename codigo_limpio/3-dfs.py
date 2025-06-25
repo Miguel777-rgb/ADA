@@ -19,11 +19,6 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
                     handlers=[logging.FileHandler("analisis_dfs.log", mode='w', encoding='utf-8'),
                               logging.StreamHandler()])
 
-<<<<<<< HEAD
-# --- Funciones Auxiliares ---
-=======
-# --- Funciones Auxiliares  ---
->>>>>>> 852727a85ebe2ed58458c4cbf346fe0d1af5d2f1
 def cargar_grafo(grafo_path: str) -> Optional[ig.Graph]:
     """Carga un grafo desde un archivo pickle."""
     logging.info(f"Cargando el grafo desde '{grafo_path}'...")
