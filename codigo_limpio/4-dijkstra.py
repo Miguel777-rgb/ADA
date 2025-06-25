@@ -102,10 +102,6 @@ def encontrar_camino_mas_corto_dijkstra(graph: ig.Graph, source: int, sink: int)
     previous_nodes = {v.index: None for v in graph.vs}
     distances[source] = 0
     priority_queue = [(0, source)]
-<<<<<<< HEAD
-=======
-
->>>>>>> f470e255f00c5659d582126782f9cf7abac44dd6
     try:
         while priority_queue:
             current_distance, current_node_id = heapq.heappop(priority_queue)
@@ -231,14 +227,8 @@ def agregar_caminos_random_al_mapa(m: folium.Map, graph: ig.Graph, num_caminos: 
         folium.PolyLine(puntos, color=color, weight=weight, opacity=opacity, tooltip=tooltip).add_to(random_group)
         
     random_group.add_to(m)
-<<<<<<< HEAD
     return caminos_generados 
 
-=======
-    return caminos_generados # ### MODIFICADO ### Retorna la lista de caminos
-
-### NUEVA FUNCIÓN ###
->>>>>>> f470e255f00c5659d582126782f9cf7abac44dd6
 def agregar_capa_nodos_de_caminos(m: folium.Map, graph: ig.Graph, camino_principal: List[int], caminos_random: List[Dict[str, Any]]):
     """Agrega una capa al mapa con todos los nodos que pertenecen a los caminos visualizados."""
     
@@ -268,26 +258,16 @@ def agregar_capa_nodos_de_caminos(m: folium.Map, graph: ig.Graph, camino_princip
     nodos_group.add_to(m)
 
 # --- Bloque Principal de Ejecución ---
-# --- Bloque Principal de Ejecución ---
 if __name__ == "__main__":
     GRAFO_PKL_ENTRADA = 'grafo_igraph_paralelizado.pkl'
     MAPA_HTML_SALIDA = 'analisis_de_red_dijkstra.html'
-<<<<<<< HEAD
     # Nota: El código original calcula 1000 caminos, no 100.
-    # Puedes cambiar este valor si lo deseas.
-    NUM_CAMINOS_RANDOM = 1000
-=======
     NUM_CAMINOS_RANDOM = 100
->>>>>>> f470e255f00c5659d582126782f9cf7abac44dd6
 
     mi_grafo = cargar_grafo(GRAFO_PKL_ENTRADA)
 
     if mi_grafo:
         preparar_pesos_geograficos(mi_grafo, force_recalc=False)
-<<<<<<< HEAD
-=======
-
->>>>>>> f470e255f00c5659d582126782f9cf7abac44dd6
         par_distante = encontrar_nodos_mas_distantes_aprox(mi_grafo)
 
         if par_distante:
@@ -299,7 +279,6 @@ if __name__ == "__main__":
                 mapa_resultado = crear_mapa_camino_corto(mi_grafo, camino_optimo, coste_total, SOURCE_NODE, SINK_NODE)
 
                 if mapa_resultado:
-<<<<<<< HEAD
                     caminos_aleatorios_generados = agregar_caminos_random_al_mapa(mapa_resultado, mi_grafo, NUM_CAMINOS_RANDOM)
                     
                     promedio_distancia_random = 0.0
@@ -309,21 +288,11 @@ if __name__ == "__main__":
                         distancias_random = [camino['length_km'] for camino in caminos_aleatorios_generados]
                         promedio_distancia_random = sum(distancias_random) / num_caminos_generados
                     
-=======
-                    # ### MODIFICADO ### Capturar el resultado de la función
-                    caminos_aleatorios_generados = agregar_caminos_random_al_mapa(mapa_resultado, mi_grafo, NUM_CAMINOS_RANDOM)
-                    
-                    # ### NUEVO ### Llamada a la nueva función para agregar la capa de nodos
->>>>>>> f470e255f00c5659d582126782f9cf7abac44dd6
                     agregar_capa_nodos_de_caminos(mapa_resultado, mi_grafo, camino_optimo, caminos_aleatorios_generados)
                     
                     folium.LayerControl().add_to(mapa_resultado)
                     mapa_resultado.save(MAPA_HTML_SALIDA)
                     
-<<<<<<< HEAD
-=======
-                    # ### MODIFICADO ### Actualizar el resumen final
->>>>>>> f470e255f00c5659d582126782f9cf7abac44dd6
                     print("\n" + "="*60)
                     print("      ANÁLISIS DE RUTA ÓPTIMA (DIJKSTRA) COMPLETADO")
                     print("="*60)
