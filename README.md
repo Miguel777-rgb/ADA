@@ -7,7 +7,7 @@ https://drive.google.com/drive/folders/1gLylv7wahcpLzcefsCbAXcYFj1ut7yfo?usp=sha
 
 También, se pueden ver los resultados a partir de:
 ```bash
-/vista_grafo/1-index.html
+vista_grafo/1-index.html
 ```
 ---
 
