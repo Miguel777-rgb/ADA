@@ -11,7 +11,6 @@ import colorsys
 # --- Constantes y Configuración ---
 SOURCE_NODE = 1
 NUM_CAPAS_DESEADAS = 10 
-# Reduce el camino de ~10 millones de nodos a este número antes de crear el mapa.
 MAX_NODOS_PARA_MAPA = 50
 
 # --- Configuración del Logging ---
