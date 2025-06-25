@@ -167,10 +167,19 @@ Estos cuatro scripts son donde la teoría de grafos cobra vida. Todos comparten 
 *   **¿Qué hace?** Implementa una Búsqueda en Amplitud (BFS), que explora la red en "ondas" o niveles: primero el nodo de inicio, luego todos sus vecinos directos (nivel 1), luego los vecinos de los vecinos (nivel 2), y así sucesivamente.
 *   **¿Para qué sirve?** Es el algoritmo ideal para encontrar el camino más corto en términos de número de saltos. Se usa en redes sociales para encontrar "grados de separación" o en enrutamiento de redes para encontrar el menor número de saltos.
 *   **Visualización Clave:** El mapa resultante es muy informativo. Muestra todo el **árbol de expansión** explorado por el BFS con líneas grises. Sobre este árbol, superpone una **línea animada** que traza el camino más largo (en saltos) encontrado, ilustrando de manera dinámica y clara la extensión máxima de la búsqueda desde el punto de partida.
-                
 
 
-1.  **El grafo tiene un "componente gigante" muy denso.** El análisis de comunidades (imagen original) muestra que casi 9 millones de los 10 millones de nodos pertenecen a una única comunidad masiva. Esto indica que la red está altamente interconectada, formando un núcleo central donde la mayoría de los puntos están conectados entre sí, directa o indirectamente.
+#### `5-prim-mst.py`: El Cableador Eficiente
+
+*   **¿Qué hace?** Implementa el algoritmo de Prim para encontrar el **Árbol de Expansión Mínima** (o *Minimum Spanning Tree*, MST) de la red. Un MST es una sub-red que conecta todos los nodos con el menor coste total posible (la suma de pesos de las aristas) y sin crear ciclos. El script incluye una implementación manual de un heap binario (`Min-Heap`), la estructura de datos clave para una ejecución eficiente de Prim. También es capaz de manejar grafos no conexos, calculando un "bosque" de expansión mínima (un MST para cada componente).
+
+*   **¿Para qué sirve?** Imagina que tienes que conectar todas las localizaciones de nuestro mapa con fibra óptica. No buscas la ruta más corta entre dos puntos (eso es Dijkstra), sino la **red de cableado total más barata** que garantice que todos estén conectados. El MST te da exactamente ese diseño óptimo. En nuestro caso, al usar la distancia geográfica como peso, el script diseña la red de conexión físicamente más corta y eficiente posible.
+
+*   **Visualización Clave:** El script genera un mapa interactivo usando la plataforma Graphistry. A diferencia de mostrar una única ruta, aquí se visualiza el **"esqueleto" completo** de la red. El resultado es una estructura de árbol (o un bosque de árboles si hay islas de nodos) que se extiende por el mapa, mostrando la infraestructura mínima necesaria para conectar todos los puntos. Es la "columna vertebral" de la red, sin ninguna conexión redundante o ineficiente. Para manejar grafos muy grandes, el script visualiza una muestra del MST, manteniendo la estructura general para su análisis.
+
+#### Conclusiones
+
+1.  **El grafo tiene un "componente gigante" muy denso.** El análisis de comunidades muestra que casi 9 millones de los 10 millones de nodos pertenecen a una única comunidad masiva. Esto indica que la red está altamente interconectada, formando un núcleo central donde la mayoría de los puntos están conectados entre sí, directa o indirectamente.
 
 2.  **Es posible encontrar rutas muy eficientes entre puntos lejanos.** El mapa de Dijkstra (`analisis_de_red_dijkstra.html`) demuestra que, a pesar del enorme tamaño de la red, el algoritmo encontró una ruta óptima de aproximadamente **19,600 km**. Este camino es notablemente más corto que muchas otras rutas aleatorias, lo que prueba la eficacia del algoritmo para optimizar conexiones en una red compleja.
 
