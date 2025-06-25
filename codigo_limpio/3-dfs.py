@@ -104,7 +104,7 @@ def crear_mapa_dfs_por_capas(
             color_segmento = generar_color_gradiente_hls(j, total_pasos_visuales)
             folium.PolyLine(locations=coords, color=color_segmento, weight=2.5, opacity=1.0).add_to(fg_camino_segmentado)
         
-        # --- NUEVO: AÑADIR MARCADORES DE INICIO Y FIN PARA ESTA CAPA ---
+        # --- MARCADORES DE INICIO Y FIN PARA ESTA CAPA ---
         start_node_layer = camino_a_dibujar[i]
         end_node_layer = camino_a_dibujar[end_paso]
         
