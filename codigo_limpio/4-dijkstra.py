@@ -93,7 +93,7 @@ def encontrar_nodos_mas_distantes_aprox(graph: ig.Graph) -> Optional[Tuple[int, 
         logging.info(f"Par más distante encontrado: Nodos {par_mas_distante} (Distancia: {max_dist:.2f} km)")
     return par_mas_distante
 
-# --- FUNCIÓN DE DIJKSTRA REIMPLEMENTADA ---
+# --- FUNCIÓN DE DIJKSTRA ---
 def encontrar_camino_mas_corto_dijkstra(graph: ig.Graph, source: int, sink: int) -> Tuple[Optional[List[int]], Optional[float], float]:
     logging.info(f"Iniciando algoritmo de Dijkstra (implementación manual) de nodo {source} a {sink}.")
     start_time = time.time()
@@ -261,7 +261,6 @@ def agregar_capa_nodos_de_caminos(m: folium.Map, graph: ig.Graph, camino_princip
 if __name__ == "__main__":
     GRAFO_PKL_ENTRADA = 'grafo_igraph_paralelizado.pkl'
     MAPA_HTML_SALIDA = 'analisis_de_red_dijkstra.html'
-    # Nota: El código original calcula 1000 caminos, no 100.
     NUM_CAMINOS_RANDOM = 100
 
     mi_grafo = cargar_grafo(GRAFO_PKL_ENTRADA)
@@ -302,12 +301,10 @@ if __name__ == "__main__":
                     print(f"Número de saltos (nodos) en el camino: {len(camino_optimo)}")
                     print(f"Tiempo de cálculo (Dijkstra): {tiempo_dijkstra:.4f} segundos")
                     
-                    ### AÑADIDO: MOSTRAR EL RESULTADO DEL PROMEDIO ###
                     if promedio_distancia_random > 0:
                         print("-" * 20)
                         print("Análisis de la muestra de caminos aleatorios:")
                         print(f"Distancia promedio de los {num_caminos_generados} caminos de muestra: {promedio_distancia_random:.2f} km")
-                    ### FIN DEL CÓDIGO AÑADIDO ###
                     
                     print(f"\nSe ha generado un mapa interactivo en: '{MAPA_HTML_SALIDA}'")
                     print("El mapa contiene las siguientes capas (usa el control de capas):")
