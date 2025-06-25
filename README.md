@@ -215,12 +215,5 @@ Si bien las documentaciones oficiales son las referencias primarias, los siguien
 * **Comunidades en línea:**
     * Reddit (subreddits como r/learnpython ([https://www.reddit.com/r/learnpython/](https://www.reddit.com/r/learnpython/)), r/python ([https://www.reddit.com/r/python/](https://www.reddit.com/r/python/)))
 
-**Apunte:** Las fechas de recuperación ("Recuperado de") se indican como "s. f." (sin fecha) ya que la documentación de las librerías suele estar en constante actualización y no siempre tiene una fecha de publicación específica para la totalidad del sitio web. Si estuvieras citando una sección específica con una fecha, deberías incluirla. Los enlaces a los recursos adicionales son generales para facilitar la búsqueda de tutoriales y cursos relevantes.
 
-## Concluyendo
-
-* El parámetro `num_procesos` en la función `procesar_usuarios_paralelizado` se establece por defecto al número de núcleos de la CPU, lo que generalmente proporciona un buen rendimiento. Puede ajustar este valor según las capacidades de su sistema.
-* Se realiza una limpieza de memoria explícita (`del` y `gc.collect()`) después de la creación del grafo para liberar recursos, especialmente importante cuando se trabaja con grandes conjuntos de datos.
-* El código incluye validaciones básicas para asegurar que los IDs de los usuarios en el archivo de conexiones estén dentro del rango válido de nodos.
-* El acceso a los atributos de los vértices en `igraph` se realiza mediante la indexación del objeto `VertexSeq` (e.g., `grafo_cargado.vs[0]['lat']`).
 
