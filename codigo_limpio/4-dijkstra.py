@@ -181,7 +181,6 @@ def crear_mapa_camino_corto(graph: ig.Graph, camino: List[int], coste: float, so
         logging.error(f"No se pudo crear el mapa base. Error: {e}")
         return None
 
-### --- VERSIÓN CORREGIDA Y MEJORADA --- ###
 def agregar_caminos_random_al_mapa(m: folium.Map, graph: ig.Graph, num_caminos: int) -> List[Dict[str, Any]]:
     """
     Genera caminos aleatorios usando la implementación manual de Dijkstra
